@@ -1,0 +1,328 @@
+[
+  {
+    "id": "922e939c-77bc-411b-ae68-5ae32df6ab57",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/a04830aa-f0e1-424b-816f-6df40238e573.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\a04830aa-f0e1-424b-816f-6df40238e573.jpg",
+    "description": "ye I fucked up g",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T13:41:12.985Z",
+    "updatedAt": "2025-10-03T13:41:12.985Z"
+  },
+  {
+    "id": "fd2f039d-5bab-407a-831a-0144477e8c8e",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/5ccc845c-d4b1-44dc-9b30-5f02f53f5f0e.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\5ccc845c-d4b1-44dc-9b30-5f02f53f5f0e.jpg",
+    "description": "I crashed hard",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T13:43:51.093Z",
+    "updatedAt": "2025-10-03T13:43:51.093Z"
+  },
+  {
+    "id": "59d8f62d-63b5-479b-8657-bebf7027a157",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/0e3ae3ec-523f-4df7-b2d3-89fb34581f84.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\0e3ae3ec-523f-4df7-b2d3-89fb34581f84.jpg",
+    "description": "got hit hard",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T13:55:53.901Z",
+    "updatedAt": "2025-10-03T13:55:53.901Z"
+  },
+  {
+    "id": "6cda0830-3a3c-4c93-873e-65ac8d1dfbfc",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/7c63c6de-30e7-428c-b38b-45bedefdfab8.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\7c63c6de-30e7-428c-b38b-45bedefdfab8.jpg",
+    "description": "crashed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T13:57:39.714Z",
+    "updatedAt": "2025-10-03T13:57:39.714Z"
+  },
+  {
+    "id": "7c7f2ceb-7813-4765-b4ef-4e927c7599d9",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/e4cb81e0-3f7f-4b09-baf4-9f0b2575f5cc.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\e4cb81e0-3f7f-4b09-baf4-9f0b2575f5cc.jpg",
+    "description": "crashed very haaad",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:01:48.859Z",
+    "updatedAt": "2025-10-03T14:01:48.859Z"
+  },
+  {
+    "id": "7d390357-c6de-4c31-8366-6e2fed205590",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/3a7b8a78-8157-4dfc-b6d4-fa0b7d14067a.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\3a7b8a78-8157-4dfc-b6d4-fa0b7d14067a.jpg",
+    "description": "crasheed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:04:38.045Z",
+    "updatedAt": "2025-10-03T14:04:38.045Z"
+  },
+  {
+    "id": "640f196c-b7cd-489e-88ce-8f3eab02b789",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/b5188fdd-97fa-437e-bef2-0fb20e311bc0.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\b5188fdd-97fa-437e-bef2-0fb20e311bc0.jpg",
+    "description": "body damage",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Minor",
+        "damageTypes": [
+          "Surface scratches",
+          "Possible dents"
+        ],
+        "costCategory": "Low",
+        "affectedAreas": [
+          "Unknown - requires manual inspection"
+        ],
+        "safetyConcerns": "Manual inspection recommended",
+        "confidence": 3,
+        "summary": "Basic analysis suggests minor damage. Professional inspection recommended for accurate assessment."
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:12:38.266Z",
+    "updatedAt": "2025-10-03T14:12:38.266Z"
+  },
+  {
+    "id": "5854df59-3400-4347-83b0-358fc1d3fa65",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/d8dcd9ae-e753-4ff0-9c31-e98132df3ecd.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\d8dcd9ae-e753-4ff0-9c31-e98132df3ecd.jpg",
+    "description": "body damage",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\n    \"broken parts\",\n    \"severe structural damage\",\n    \"crushed components\"\n  ],\n  \"costCategory\": \"Very High: $5000+\",\n  \"affectedAreas\": [\n    \"front\",\n    \"sides\"\n  ],\n  \"safetyConcerns\": [\n    \"compromised structural integrity\",\n    \"potential airbag deployment issues\"\n  ],\n  \"confidence\": 9,\n  \"summary\": \"The vehicle has sustained severe damage, particularly to the front and sides, rendering it a total loss. The structural integrity is significantly compromised with major components broken or destroyed, resulting in very high repair costs.\"\n}\n```",
+        "severity": "Unknown",
+        "confidence": 5
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:17:09.550Z",
+    "updatedAt": "2025-10-03T14:17:09.550Z"
+  },
+  {
+    "id": "d304740e-ac6b-4008-acd9-897910ff49ff",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/d187f5f7-3754-40ea-a46e-a0c662abe506.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\d187f5f7-3754-40ea-a46e-a0c662abe506.jpg",
+    "description": "car damaged innit",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"broken parts\", \"severe structural damage\"],\n  \"costCategory\": \"Very High: $5000+\",\n  \"affectedAreas\": [\"front\", \"sides\", \"roof\"],\n  \"safetyConcerns\": \"Significant structural integrity compromised\",\n  \"confidence\": 10,\n  \"summary\": \"The car has sustained severe damage with major structural impact, likely rendering it a total loss. Repair costs would be very high, and there are significant safety concerns regarding the car's structural integrity.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:32:49.755Z",
+    "updatedAt": "2025-10-03T14:32:49.755Z"
+  },
+  {
+    "id": "d2dee85f-6e45-4b37-8490-a1a133c324de",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/4bfdab49-b9ea-4813-87a0-cad00d56ba06.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\4bfdab49-b9ea-4813-87a0-cad00d56ba06.jpg",
+    "description": "damaged hard",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"broken parts\", \"severe impact damage\"],\n  \"costCategory\": \"Very High: $5000+\",\n  \"affectedAreas\": [\"front\", \"roof\", \"sides\"],\n  \"safetyConcerns\": \"Significant structural damage, potential airbag deployment\",\n  \"confidence\": 10,\n  \"summary\": \"The vehicle has sustained extensive damage to the front, roof, and sides. The damage includes broken and missing parts, indicating a severe impact. The repair costs are likely to exceed $5000, categorizing the damage as a total loss. The structural integrity is compromised, posing serious safety concerns.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:41:05.093Z",
+    "updatedAt": "2025-10-03T14:41:05.093Z"
+  },
+  {
+    "id": "17f4bdf0-17d1-4d5f-920d-d8f10be6a143",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/3eae2295-0890-4a31-b374-94700bc7e21e.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\3eae2295-0890-4a31-b374-94700bc7e21e.jpg",
+    "description": "hard crash",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"structural damage\", \"broken parts\", \"missing components\", \"paint damage\", \"glass damage\"],\n  \"costCategory\": \"Category: $5000+\",\n  \"affectedAreas\": [\"front bumper\", \"hood\", \"windshield\", \"doors\", \"fenders\", \"roof\", \"wheels\"],\n  \"safetyConcerns\": \"The structural integrity of the vehicle is heavily compromised.\",\n  \"confidence\": 9,\n  \"summary\": \"The vehicle has sustained severe damage, with significant structural compromise and multiple components missing or broken. The front end is almost entirely destroyed, and the windshield is shattered. The cost of repair would likely exceed the vehicle's value, categorizing it as a total loss.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:44:22.603Z",
+    "updatedAt": "2025-10-03T14:44:22.603Z"
+  },
+  {
+    "id": "33a02f63-eecc-419c-adfd-72feaafeb9b5",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/eb68b6e3-b022-45a7-a191-ad8b57892620.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\eb68b6e3-b022-45a7-a191-ad8b57892620.jpg",
+    "description": "Car damaged terribly",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"structural damage\", \"broken parts\", \"missing components\", \"paint damage\", \"glass damage\"],\n  \"costCategory\": \"Very High: $5000+\",\n  \"affectedAreas\": [\"front end\", \"doors\", \"windshield\", \"roof\", \"wheels\"],\n  \"safetyConcerns\": \"Severe structural damage poses critical safety risks.\",\n  \"confidence\": 10,\n  \"summary\": \"The vehicle has sustained severe damage, with extensive structural and component destruction. The entire front end is compromised, with significant damage to the windshield and doors. Given the extent of the damage, this vehicle is a total loss requiring comprehensive replacement or repair.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-03T14:46:26.189Z",
+    "updatedAt": "2025-10-03T14:46:26.189Z"
+  }
+]

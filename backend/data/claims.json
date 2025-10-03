@@ -1,0 +1,17 @@
+[
+  {
+    "id": "6a9e57bc-5395-4d75-beae-87b0109470c3",
+    "claimNumber": "CLM-1759501214001-PK1U",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "assessmentId": "5854df59-3400-4347-83b0-358fc1d3fa65",
+    "claimType": "collision",
+    "incidentDate": "2025-09-24",
+    "incidentDescription": "ye he just fully turned into my",
+    "policyNumber": "12325",
+    "status": "submitted",
+    "estimatedCost": "Unknown",
+    "priority": "Medium",
+    "createdAt": "2025-10-03T14:20:14.001Z",
+    "updatedAt": "2025-10-03T14:20:14.001Z"
+  }
+]

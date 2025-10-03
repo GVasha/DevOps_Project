@@ -1,0 +1,42 @@
+# Cursor Custom Rules
+
+## Rule: Social Hashtags
+- Always include a reasonable amount of hashtags when generating social content.  
+- Never use fewer than 5 relevant hashtags for a post.  
+- Hashtags must be contextually relevant and avoid spammy repetition.  
+
+---
+
+## Rule: Security & Passwords
+- Passwords must always be hashed securely before storage.  
+- Use **bcrypt**, **Argon2**, or **PBKDF2** for hashing.  
+- Never store or transmit plaintext passwords.  
+- Sensitive fields like tokens or API keys must be environment-protected and never hardcoded.  
+
+---
+
+## Rule: Code Quality
+- Do not write spaghetti code. Maintain clean, structured code.  
+- Each file/module must serve a clear purpose.  
+- Functions should be small, reusable, and documented.  
+- Avoid excessive nesting (max 3 levels deep).  
+- Ensure proper error handling with descriptive messages.  
+
+---
+
+## Rule: Global Design Standards
+- Follow professional minimalistic design principles.  
+- Use clean, minimalistic layouts.  
+- Maintain consistent typography hierarchy (headings, subheadings, body text).  
+- Apply a neutral color palette with strong contrast for accessibility.  
+- Ensure **WCAG accessibility compliance** (contrast, alt text, keyboard navigation).  
+- Prioritize responsiveness (desktop, tablet, mobile).  
+- Avoid unnecessary clutter, animations, or visual noise.  
+
+---
+
+## Rule: Development Practices
+- Use Git version control with clear commit messages.  
+- Apply linters and formatters (Prettier, ESLint) for consistency.  
+- Prioritize readability over clever hacks.  
+- Ensure all components are scalable and maintainable.  
