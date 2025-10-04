@@ -79,26 +79,17 @@ Provide your complete assessment now.`
         }
       );
 
-      const analysis = response.data.choices[0].message.content;
-      
-      try {
-        // Try to parse as JSON
-        const parsedAnalysis = JSON.parse(analysis);
-        const normalized = this.normalizeAnalysis(parsedAnalysis);
-        return {
-          success: true,
-          analysis: normalized,
-          provider: 'OpenAI GPT-4 Vision'
-        };
-      } catch (parseError) {
-        // If JSON parsing fails, return raw analysis
-        const fallback = this.normalizeAnalysis({ summary: analysis, severity: 'Unknown', confidence: 5 });
-        return {
-          success: true,
-          analysis: fallback,
-          provider: 'OpenAI GPT-4 Vision'
-        };
-      }
+      const analysis = response.data.choices[0].message.content || '';
+
+      // Robustly extract JSON from possible code fences or prefixed text
+      const extracted = this.extractJsonBlock(analysis);
+
+      const normalized = this.normalizeAnalysis(extracted);
+      return {
+        success: true,
+        analysis: normalized,
+        provider: 'OpenAI GPT-4 Vision'
+      };
 
     } catch (error) {
       console.error('OpenAI analysis error:', error);
@@ -211,6 +202,30 @@ Provide your complete assessment now.`
     return hasRequiredFields && hasValidSeverity && hasValidConfidence;
   }
 
+  // Extract JSON payload from free-form/markdown responses
+  extractJsonBlock(text) {
+    if (!text) return {};
+    const str = String(text);
+    
+    // Try code fences ```json ... ``` or ``` ... ```
+    const fenceRegex = /```(?:json)?\s*([\s\S]*?)```/i;
+    const fenceMatch = str.match(fenceRegex);
+    if (fenceMatch && fenceMatch[1]) {
+      const fenced = fenceMatch[1].trim();
+      try { return JSON.parse(fenced); } catch (_) {}
+    }
+
+    // Try first JSON-like object
+    const objRegex = /\{[\s\S]*\}/;
+    const objMatch = str.match(objRegex);
+    if (objMatch) {
+      try { return JSON.parse(objMatch[0]); } catch (_) {}
+    }
+
+    // Fallback: return summary-only
+    return { summary: str };
+  }
+
   // Normalize various shapes of AI output into a consistent schema
   normalizeAnalysis(raw) {
     const toArray = (value) => {
@@ -223,20 +238,31 @@ Provide your complete assessment now.`
     const pickCategory = (val) => {
       if (!val) return 'Unknown';
       const str = String(val).trim();
-      const beforeColon = str.split(':')[0].trim();
       
-      // If it says "Category: $X", map the dollar range to a category
-      if (beforeColon.toLowerCase() === 'category') {
-        const afterColon = str.split(':').slice(1).join(':').trim();
-        if (afterColon.includes('5000+') || afterColon.includes('$5000')) return 'Very High';
-        if (afterColon.includes('2000') && afterColon.includes('5000')) return 'High';
-        if (afterColon.includes('500') && afterColon.includes('2000')) return 'Medium';
-        if (afterColon.includes('$0') || afterColon.includes('500')) return 'Low';
+      // Handle "Category: Very High: $5000+" format
+      if (str.toLowerCase().startsWith('category:')) {
+        const parts = str.split(':').map(p => p.trim());
+        // parts = ["Category", "Very High", "$5000+"] or ["Category", "$5000+"]
+        
+        // Check if second part is a valid category
+        const allowed = ['None','Low','Medium','High','Very High'];
+        if (parts.length > 1 && allowed.includes(parts[1])) {
+          return parts[1]; // Return "Very High"
+        }
+        
+        // Otherwise map dollar range to category
+        const dollarPart = parts.slice(1).join(':');
+        if (dollarPart.includes('5000+') || dollarPart.includes('$5000')) return 'Very High';
+        if (dollarPart.includes('2000') && dollarPart.includes('5000')) return 'High';
+        if (dollarPart.includes('500') && dollarPart.includes('2000')) return 'Medium';
+        if (dollarPart.includes('$0') || dollarPart.includes('500')) return 'Low';
         return 'Unknown';
       }
       
+      // Standard format like "Very High: $5000+"
+      const beforeColon = str.split(':')[0].trim();
       const allowed = ['None','Low','Medium','High','Very High'];
-      return allowed.includes(beforeColon) ? beforeColon : beforeColon || 'Unknown';
+      return allowed.includes(beforeColon) ? beforeColon : 'Unknown';
     };
 
     const normalizeSeverity = (val) => {
@@ -257,12 +283,23 @@ Provide your complete assessment now.`
     const damageTypes = toArray(raw.damageTypes);
     const affectedAreas = toArray(raw.affectedAreas);
     const safetyList = toArray(raw.safetyConcerns);
-    const safetyConcerns = safetyList.join(', ') || (typeof raw.safetyConcerns === 'string' ? raw.safetyConcerns : '') || null;
+    const safetyConcerns = safetyList.length > 0 ? safetyList.join(', ') : (typeof raw.safetyConcerns === 'string' && raw.safetyConcerns ? raw.safetyConcerns : null);
     const summary = (raw.summary && String(raw.summary).trim()) || '';
     const costCategory = pickCategory(raw.costCategory);
-    const costRange = (typeof raw.costCategory === 'string' && raw.costCategory.includes(':'))
-      ? raw.costCategory.split(':').slice(1).join(':').trim()
-      : null;
+    
+    // Extract cost range from formats like "Category: Very High: $5000+" or "Very High: $5000+"
+    let costRange = null;
+    if (typeof raw.costCategory === 'string' && raw.costCategory.includes(':')) {
+      const parts = raw.costCategory.split(':').map(p => p.trim());
+      // Find the part that looks like a dollar amount
+      const dollarPart = parts.find(p => p.includes('$'));
+      if (dollarPart) {
+        costRange = dollarPart;
+      } else if (parts.length > 1) {
+        // Last part after all colons
+        costRange = parts[parts.length - 1];
+      }
+    }
 
     const normalized = {
       severity: normalizeSeverity(raw.severity),
@@ -274,6 +311,12 @@ Provide your complete assessment now.`
       confidence: confidenceNum(raw.confidence),
       summary
     };
+
+    // Minimal dev log (disable in production)
+    if (process.env.NODE_ENV !== 'production') {
+      // Intentionally concise to avoid log noise
+      console.log('AI normalized:', normalized.severity, normalized.costCategory, normalized.confidence);
+    }
 
     // Final validation fallback
     if (!this.validateAnalysis(normalized)) {

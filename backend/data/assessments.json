@@ -324,5 +324,164 @@
     "status": "completed",
     "createdAt": "2025-10-03T14:46:26.189Z",
     "updatedAt": "2025-10-03T14:46:26.189Z"
+  },
+  {
+    "id": "ef800e26-286d-43cd-861d-9c292f0a173a",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/33db15b9-7fb5-45f1-9e2e-7dfbaabf450e.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\33db15b9-7fb5-45f1-9e2e-7dfbaabf450e.jpg",
+    "description": "crashed, wife died",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\n    \"broken parts\",\n    \"missing components\",\n    \"structural damage\",\n    \"glass damage\"\n  ],\n  \"costCategory\": \"Category: $5000+\",\n  \"affectedAreas\": [\n    \"front bumper\",\n    \"hood\",\n    \"doors\",\n    \"windshield\",\n    \"fenders\",\n    \"front wheels\",\n    \"roof\"\n  ],\n  \"safetyConcerns\": \"Major structural damage poses significant safety risks.\",\n  \"confidence\": 9,\n  \"summary\": \"The vehicle has sustained extensive damage, including severe structural damage and broken components. The front of the car is heavily compromised, indicating a likelihood of total loss. Immediate safety concerns are apparent due to the exposed structure and shattered glass.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-04T18:37:49.543Z",
+    "updatedAt": "2025-10-04T18:37:49.543Z"
+  },
+  {
+    "id": "6c78979f-69e6-4a86-a8ad-5e4516b7da39",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/2ad82d7d-caf7-41fa-a135-174e4f57fd15.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\2ad82d7d-caf7-41fa-a135-174e4f57fd15.jpg",
+    "description": "crashed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"structural damage\", \"broken parts\", \"missing components\", \"paint damage\", \"glass damage\"],\n  \"costCategory\": \"Category: Very High\",\n  \"affectedAreas\": [\"front bumper\", \"hood\", \"front fenders\", \"windshield\", \"wheels\", \"front structure\", \"doors\"],\n  \"safetyConcerns\": \"Major structural failure, potential airbag deployment, severe impact damage.\",\n  \"confidence\": 9,\n  \"summary\": \"The vehicle has sustained catastrophic damage, with significant structural compromise and missing components. The front section is heavily damaged, and the impact likely renders the car a total loss due to repair costs and diminished structural integrity.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-04T18:45:23.570Z",
+    "updatedAt": "2025-10-04T18:45:23.570Z"
+  },
+  {
+    "id": "c6d32e0d-550b-48b1-9c21-98b9f6eceadc",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/9b9b7e90-1212-4fc3-820c-111b531fe008.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\9b9b7e90-1212-4fc3-820c-111b531fe008.jpg",
+    "description": "broken",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"broken parts\", \"missing components\", \"structural damage\", \"paint damage\", \"glass damage\"],\n  \"costCategory\": \"Category: Very High: $5000+\",\n  \"affectedAreas\": [\"front bumper\", \"hood\", \"doors\", \"windshield\", \"fenders\", \"wheels\"],\n  \"safetyConcerns\": \"The extensive structural damage poses significant safety issues.\",\n  \"confidence\": 9,\n  \"summary\": \"The vehicle has suffered catastrophic damage with missing and broken components, particularly at the front. Structural integrity is severely compromised, and the cost of repairs would likely exceed the value of the vehicle, suggesting a total loss.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-04T18:48:58.841Z",
+    "updatedAt": "2025-10-04T18:48:58.841Z"
+  },
+  {
+    "id": "e8d7c174-d028-436f-82c4-600e47abeac1",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/c7e72187-c2d2-47b8-9bbb-924425344b81.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\c7e72187-c2d2-47b8-9bbb-924425344b81.jpg",
+    "description": "I crashed g",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"structural damage\", \"broken parts\", \"missing components\", \"glass damage\"],\n  \"costCategory\": \"Category: Very High: $5000+\",\n  \"affectedAreas\": [\"front bumper\", \"hood\", \"windshield\", \"doors\", \"fenders\", \"roof\"],\n  \"safetyConcerns\": \"The structural integrity of the vehicle is compromised. Driving the vehicle is not possible.\",\n  \"confidence\": 10,\n  \"summary\": \"The vehicle has sustained extensive structural damage, particularly to the front and side components. The extent of the destruction qualifies as a total loss due to the damaged frame and critical components, making it uneconomical to repair.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-04T18:50:15.563Z",
+    "updatedAt": "2025-10-04T18:50:15.563Z"
+  },
+  {
+    "id": "57a72d93-4342-4ba6-9e42-46e0e4eb3064",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/328aa1b6-9b5d-4663-813d-611da53e3e71.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\328aa1b6-9b5d-4663-813d-611da53e3e71.jpg",
+    "description": "crashed g",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 5,
+        "summary": "```json\n{\n  \"severity\": \"Total Loss\",\n  \"damageTypes\": [\"dents\", \"broken parts\", \"missing components\", \"paint damage\", \"glass damage\", \"structural damage\"],\n  \"costCategory\": \"Category: Very High\",\n  \"affectedAreas\": [\"front bumper\", \"hood\", \"roof\", \"doors\", \"fenders\", \"windshield\", \"wheels\"],\n  \"safetyConcerns\": \"Major structural damage and compromised safety features\",\n  \"confidence\": 9,\n  \"summary\": \"The vehicle has suffered extensive damage rendering it a total loss. Significant structural damage is present with most components severely damaged or missing. Repair costs will far exceed the value of the car, impacting its roadworthiness.\"\n}\n```"
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-04T18:53:47.288Z",
+    "updatedAt": "2025-10-04T18:53:47.288Z"
+  },
+  {
+    "id": "682db135-cc1a-4f9f-90ff-197dcbabf100",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/3bdba141-958e-4979-93e2-e3a41bcd8a47.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\3bdba141-958e-4979-93e2-e3a41bcd8a47.jpg",
+    "description": "crashed g",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Total Loss",
+        "damageTypes": [
+          "broken parts",
+          "missing components",
+          "paint damage",
+          "glass damage",
+          "structural damage"
+        ],
+        "costCategory": "Very High",
+        "costRange": "$5000+",
+        "affectedAreas": [
+          "front bumper",
+          "hood",
+          "roof",
+          "doors",
+          "fenders",
+          "windshield",
+          "wheels"
+        ],
+        "safetyConcerns": "Significant structural damage and missing components pose severe safety risks.",
+        "confidence": 9,
+        "summary": "The vehicle has suffered catastrophic damage with severe structural compromise. Numerous components are broken or missing, including the entire front end and parts of the doors and windshield. Restoration costs would greatly exceed the car's value, indicating total loss."
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-04T18:58:46.520Z",
+    "updatedAt": "2025-10-04T18:58:46.520Z"
   }
 ]
