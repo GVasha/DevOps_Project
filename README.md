@@ -8,9 +8,10 @@
 - **npm** or **yarn**
 
 ### Quick Start
-1. Run `npm install` in the root directory to install all dependencies.
-2. Set the **OpenAI API key** in `backend/services/aiService.js`. (The key is a necessary environment variable for AI functionality).
-3. Start the development servers by running `npm run dev` from the root directory (`./DevOps_Project`).
+1. Clone the repository to the local machine, and navigate to that directory.
+2.  Run `npm install` in the root directory to install all dependencies.
+3. Set the **OpenAI API key** in `backend/services/aiService.js`. (The key is a necessary environment variable for AI functionality).
+4. Start the development servers by running `npm run dev` from the root directory (`./DevOps_Project`).
 
 ---
 
