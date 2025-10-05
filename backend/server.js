@@ -5,6 +5,9 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 require('dotenv').config();
 
+// Debug: Check if environment variables are loaded
+console.log('🔑 OpenAI API Key loaded:', process.env.OPENAI_API_KEY ? 'YES (Hidden)' : 'NO - MISSING!');
+
 // Import routes
 const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');

@@ -61,6 +61,7 @@ const Assessment = () => {
 
       const response = await assessmentAPI.analyzeImage(analysisData);
       setAnalysisResult(response.data.assessment);
+      
       setStep(4);
       
     } catch (error) {
