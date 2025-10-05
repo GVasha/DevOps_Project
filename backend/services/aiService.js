@@ -5,10 +5,8 @@ const path = require('path');
 class AIService {
   constructor() {
     // Sanitize API key to avoid subtle issues from .env formatting
-    const rawKey = 'API_KEY_HERE';
-    this.openaiApiKey = String(rawKey)
-      .trim()                 // remove surrounding whitespace/newlines
-      .replace(/^['"]|['"]$/g, ''); // strip wrapping quotes if present
+    
+    this.openaiApiKey = 'API_KEY_HERE'
   }
 
   // Analyze car damage using OpenAI Vision API
