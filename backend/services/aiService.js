@@ -4,7 +4,11 @@ const path = require('path');
 
 class AIService {
   constructor() {
-    this.openaiApiKey = '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';
+    // Sanitize API key to avoid subtle issues from .env formatting
+    const rawKey = 'API_KEY_HERE';
+    this.openaiApiKey = String(rawKey)
+      .trim()                 // remove surrounding whitespace/newlines
+      .replace(/^['"]|['"]$/g, ''); // strip wrapping quotes if present
   }
 
   // Analyze car damage using OpenAI Vision API
@@ -92,8 +96,11 @@ Provide your complete assessment now.`
       };
 
     } catch (error) {
-      console.error('OpenAI analysis error:', error);
-      throw new Error(`AI analysis failed: ${error.message}`);
+      // Avoid logging sensitive headers; show concise, useful diagnostics
+      const status = error.response?.status;
+      const providerMsg = error.response?.data?.error?.message || error.message;
+      console.error('OpenAI analysis error:', { status, message: providerMsg });
+      throw new Error(`AI analysis failed: ${providerMsg}`);
     }
   }
 
