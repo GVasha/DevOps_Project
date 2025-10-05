@@ -5,7 +5,7 @@ const path = require('path');
 class AIService {
   constructor() {
     // Sanitize API key to avoid subtle issues from .env formatting
-    
+   
     this.openaiApiKey = 'API_KEY_HERE'
   }
 
