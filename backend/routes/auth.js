@@ -230,4 +230,31 @@ router.put('/profile', authenticateToken, [
   }
 });
 
+// Delete user account
+router.delete('/account', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    
+    // Delete user account
+    const deleted = userStorage.delete(userId);
+    
+    if (!deleted) {
+      return res.status(500).json({
+        error: 'Failed to delete account'
+      });
+    }
+
+    // Clear token (client-side will handle localStorage)
+    res.json({
+      message: 'Account deleted successfully'
+    });
+
+  } catch (error) {
+    console.error('Account deletion error:', error);
+    res.status(500).json({
+      error: 'Internal server error'
+    });
+  }
+});
+
 module.exports = router;

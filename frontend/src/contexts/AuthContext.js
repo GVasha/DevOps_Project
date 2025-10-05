@@ -124,6 +124,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const deleteAccount = async () => {
+    try {
+      setLoading(true);
+      await authAPI.deleteAccount();
+      
+      // Clear local storage and state
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
+      setUser(null);
+      setIsAuthenticated(false);
+      
+      toast.success('Account deleted successfully');
+      return { success: true };
+      
+    } catch (error) {
+      const message = error.response?.data?.error || 'Account deletion failed';
+      toast.error(message);
+      return { success: false, error: message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const value = {
     user,
     loading,
@@ -132,6 +155,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateProfile,
+    deleteAccount,
   };
 
   return (

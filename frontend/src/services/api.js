@@ -48,6 +48,7 @@ export const authAPI = {
   login: (credentials) => api.post('/auth/login', credentials),
   getProfile: () => api.get('/auth/profile'),
   updateProfile: (userData) => api.put('/auth/profile', userData),
+  deleteAccount: () => api.delete('/auth/account'),
 };
 
 // Upload API calls

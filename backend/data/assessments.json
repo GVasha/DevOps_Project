@@ -483,5 +483,65 @@
     "status": "completed",
     "createdAt": "2025-10-04T18:58:46.520Z",
     "updatedAt": "2025-10-04T18:58:46.520Z"
+  },
+  {
+    "id": "0da1c6a6-41a6-433e-995c-8e3137f15c4a",
+    "userId": "2946c58e-ed82-4521-91d9-992cc0131599",
+    "imageUrl": "/uploads/ec2a164b-0f82-416c-a75c-1051ec0214c2.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\ec2a164b-0f82-416c-a75c-1051ec0214c2.jpg",
+    "description": "blabla",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "I'm unable to assess the damage, as the image does not show a car."
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-05T01:10:36.033Z",
+    "updatedAt": "2025-10-05T01:10:36.033Z"
+  },
+  {
+    "id": "4e56f026-63e0-4386-9481-0bf496b6f280",
+    "userId": "2fd28de6-f7a2-4acd-b5ab-eb1e7cd93ff8",
+    "imageUrl": "/uploads/58590876-b7a2-4723-bce8-c9ff8073b95b.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\58590876-b7a2-4723-bce8-c9ff8073b95b.jpg",
+    "description": "crashed a car bad",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Total Loss",
+        "damageTypes": [
+          "broken parts",
+          "structural damage",
+          "glass damage",
+          "missing components"
+        ],
+        "costCategory": "Very High",
+        "costRange": "Very High",
+        "affectedAreas": [
+          "front bumper",
+          "hood",
+          "doors",
+          "windshield",
+          "fenders"
+        ],
+        "safetyConcerns": "Significant structural damage; potential risk to occupants without major repairs.",
+        "confidence": 9,
+        "summary": "The vehicle has sustained severe damage with complete structural compromise at the front end. Major components including the bumper, hood, and windshield are extensively damaged or missing. This level of damage likely categorizes the car as a total loss due to the high cost of repairs necessary for restoration."
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-05T15:16:19.561Z",
+    "updatedAt": "2025-10-05T15:16:19.561Z"
   }
 ]
