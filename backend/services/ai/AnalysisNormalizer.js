@@ -187,7 +187,7 @@ class AnalysisNormalizer {
       ...(normalized.costRange ? { costRange: normalized.costRange } : {}),
       affectedAreas: normalized.affectedAreas,
       safetyConcerns: normalized.safetyConcerns,
-      confidence: normalized.confidence ?? 0,
+      confidence: 0,
       summary: normalized.summary || 'Analysis normalized with missing fields.'
     };
   }

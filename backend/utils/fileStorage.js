@@ -66,14 +66,16 @@ class FileStorage {
   findById(id) {
     const data = this.read();
     if (!Array.isArray(data)) {
-      return null;
+      return undefined;
     }
-    const item = data.find(item => item.id === id);
-    return item || null;
+    return data.find(item => item.id === id);
   }
 
   findByEmail(email) {
     const data = this.read();
+    if (!Array.isArray(data)) {
+      return undefined;
+    }
     return data.find(item => item.email === email);
   }
 
