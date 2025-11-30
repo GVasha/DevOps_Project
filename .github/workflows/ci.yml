@@ -83,7 +83,9 @@ jobs:
       # Install Frontend Dependencies
       - name: Install frontend dependencies
         working-directory: ./frontend
-        run: npm install
+        run: |
+          npm install
+          chmod -R +x node_modules/.bin || true
       
       # Run Frontend Tests with Coverage
       - name: Run frontend tests with coverage
@@ -159,7 +161,10 @@ jobs:
       # Build Frontend
       - name: Build frontend
         working-directory: ./frontend
-        run: npm run build
+        run: |
+          echo "🔍 Checking node_modules..."
+          ls -la node_modules/.bin/react-scripts || echo "react-scripts not found"
+          npm run build
         env:
           CI: true
           GENERATE_SOURCEMAP: false
