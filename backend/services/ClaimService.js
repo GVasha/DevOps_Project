@@ -50,6 +50,9 @@ class ClaimService {
    */
   getUserClaims(userId) {
     const allClaims = this.storage.read();
+    if (!Array.isArray(allClaims)) {
+      return [];
+    }
     return allClaims
       .filter(claim => claim.userId === userId)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -66,7 +69,7 @@ class ClaimService {
    * Verifies user owns claim
    */
   verifyOwnership(claim, userId) {
-    return claim && claim.userId === userId;
+    return !!(claim && claim.userId === userId);
   }
 }
 

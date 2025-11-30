@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -121,14 +121,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,34 +143,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,14 +175,14 @@
  * File path and manipulation utilities
  */
 &nbsp;
-const path = require('path');
-const fs = require('fs');
-const { MIME_TYPES } = require('../config/constants');
+const path = <span class="cstat-no" title="statement not covered" >require('path');</span>
+const fs = <span class="cstat-no" title="statement not covered" >require('fs');</span>
+const { MIME_TYPES } = <span class="cstat-no" title="statement not covered" >require('../config/constants');</span>
 &nbsp;
 /**
  * Gets MIME type from file extension
  */
-const getMimeType = <span class="fstat-no" title="function not covered" >(f</span>ilePath) =&gt; {
+const getMimeType = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(f</span>ilePath) =&gt; {</span>
   const ext = <span class="cstat-no" title="statement not covered" >path.extname(filePath).toLowerCase();</span>
 <span class="cstat-no" title="statement not covered" >  return MIME_TYPES[ext] || 'image/jpeg';</span>
 };
@@ -190,34 +190,34 @@ const getMimeType = <span class="fstat-no" title="function not covered" >(f</spa
 /**
  * Constructs upload directory path
  */
-const getUploadDir = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+const getUploadDir = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  return path.join(__dirname, '../uploads');</span>
 };
 &nbsp;
 /**
  * Constructs file path from filename
  */
-const getFilePath = <span class="fstat-no" title="function not covered" >(f</span>ilename) =&gt; {
+const getFilePath = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(f</span>ilename) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  return path.join(getUploadDir(), filename);</span>
 };
 &nbsp;
 /**
  * Extracts filename from URL
  */
-const extractFilenameFromUrl = <span class="fstat-no" title="function not covered" >(u</span>rl) =&gt; {
+const extractFilenameFromUrl = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(u</span>rl) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  return url.replace('/uploads/', '');</span>
 };
 &nbsp;
 /**
  * Ensures directory exists, creates if it doesn't
  */
-const ensureDirectoryExists = <span class="fstat-no" title="function not covered" >(d</span>irPath) =&gt; {
+const ensureDirectoryExists = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(d</span>irPath) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  if (!fs.existsSync(dirPath)) {</span>
 <span class="cstat-no" title="statement not covered" >    fs.mkdirSync(dirPath, { recursive: true });</span>
   }
 };
 &nbsp;
-module.exports = {
+<span class="cstat-no" title="statement not covered" >module.exports = {</span>
   getMimeType,
   getUploadDir,
   getFilePath,
@@ -232,7 +232,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-30T16:42:34.571Z
+                at 2025-11-30T16:57:48.069Z
             </div>
         <script src="../prettify.js"></script>
         <script>

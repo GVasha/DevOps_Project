@@ -3,8 +3,8 @@
  */
 
 const fs = require('fs');
-const BasicProvider = require('../../../services/ai/providers/BasicProvider');
-const { AI } = require('../../../config/constants');
+const BasicProvider = require('../../../../services/ai/providers/BasicProvider');
+const { AI } = require('../../../../config/constants');
 
 describe('BasicProvider', () => {
   let provider;

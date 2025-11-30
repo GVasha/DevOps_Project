@@ -22,6 +22,8 @@ describe('AssessmentService - Edge Cases', () => {
       findById: jest.fn()
     };
     FileStorage.mockImplementation(() => mockStorage);
+    // Replace the storage on the service instance
+    service.storage = mockStorage;
   });
 
   afterEach(() => {

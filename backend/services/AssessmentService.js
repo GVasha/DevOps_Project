@@ -40,6 +40,9 @@ class AssessmentService {
    */
   getUserAssessments(userId) {
     const allAssessments = this.storage.read();
+    if (!Array.isArray(allAssessments)) {
+      return [];
+    }
     return allAssessments
       .filter(assessment => assessment.userId === userId)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -49,14 +52,15 @@ class AssessmentService {
    * Gets assessment by ID
    */
   getAssessmentById(assessmentId) {
-    return this.storage.findById(assessmentId);
+    const assessment = this.storage.findById(assessmentId);
+    return assessment || null;
   }
 
   /**
    * Verifies user owns assessment
    */
   verifyOwnership(assessment, userId) {
-    return assessment && assessment.userId === userId;
+    return !!(assessment && assessment.userId === userId);
   }
 }
 
