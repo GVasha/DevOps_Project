@@ -57,8 +57,8 @@ docker-compose up -d
 
 ### 3. Access Monitoring Tools
 
-- **Application Health**: http://localhost:5000/api/health
-- **Prometheus Metrics**: http://localhost:5000/api/metrics
+- **Application Health**: https://insurance-backend-latest.onrender.com/api/health
+- **Prometheus Metrics**: https://insurance-backend-latest.onrender.com/api/metrics
 - **Prometheus UI**: http://localhost:9090
 - **Grafana**: http://localhost:3001 (admin/admin)
 
@@ -266,7 +266,7 @@ GRAFANA_PASSWORD=admin
 
 1. Check if metrics endpoint is accessible:
    ```bash
-   curl http://localhost:5000/api/metrics
+   curl https://insurance-backend-latest.onrender.com/api/metrics
    ```
 
 2. Verify Prometheus can reach the backend:

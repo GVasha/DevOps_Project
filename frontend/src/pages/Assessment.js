@@ -7,16 +7,15 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon
 } from '@heroicons/react/24/outline';
-import { uploadAPI, assessmentAPI, getFileUrl } from '../services/api';
+import { assessmentAPI } from '../services/api';
 import ImageUpload from '../components/ImageUpload/ImageUpload';
 import Button from '../components/UI/Button';
 import Input from '../components/UI/Input';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 const Assessment = () => {
-  const [uploadLoading, setUploadLoading] = useState(false);
   const [analysisLoading, setAnalysisLoading] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [analysisResult, setAnalysisResult] = useState(null);
   const [step, setStep] = useState(1); // 1: Upload, 2: Details, 3: Analysis, 4: Results
 
@@ -27,24 +26,14 @@ const Assessment = () => {
     reset
   } = useForm();
 
-  const handleImageUpload = async (files) => {
+  const handleImageSelect = async (files) => {
     try {
-      setUploadLoading(true);
-      
-      const formData = new FormData();
-      formData.append('image', files[0].file);
-
-      const response = await uploadAPI.uploadSingle(formData);
-      const uploadedFile = response.data.file;
-
-      setUploadedImage(uploadedFile);
+      // Just store the selected image for preview, no upload to server
+      setSelectedImage(files[0]);
       setStep(2);
-      
     } catch (error) {
-      console.error('Upload error:', error);
-      throw new Error(error.response?.data?.error || 'Upload failed');
-    } finally {
-      setUploadLoading(false);
+      console.error('Image selection error:', error);
+      throw new Error('Failed to select image');
     }
   };
 
@@ -53,13 +42,13 @@ const Assessment = () => {
       setAnalysisLoading(true);
       setStep(3);
 
-      const analysisData = {
-        imageUrl: uploadedImage.url,
-        description: formData.description,
-        location: formData.location
-      };
+      // Create FormData with image file and other data
+      const analysisFormData = new FormData();
+      analysisFormData.append('image', selectedImage.file);
+      analysisFormData.append('description', formData.description || '');
+      analysisFormData.append('location', formData.location || '');
 
-      const response = await assessmentAPI.analyzeImage(analysisData);
+      const response = await assessmentAPI.analyzeImage(analysisFormData);
       setAnalysisResult(response.data.assessment);
       
       setStep(4);
@@ -75,7 +64,7 @@ const Assessment = () => {
 
   const startNewAssessment = () => {
     setStep(1);
-    setUploadedImage(null);
+    setSelectedImage(null);
     setAnalysisResult(null);
     reset();
   };
@@ -163,8 +152,8 @@ const Assessment = () => {
           </div>
 
           <ImageUpload
-            onUpload={handleImageUpload}
-            loading={uploadLoading}
+            onUpload={handleImageSelect}
+            loading={false}
             maxFiles={1}
           />
 
@@ -181,7 +170,7 @@ const Assessment = () => {
       )}
 
       {/* Step 2: Additional Details */}
-      {step === 2 && uploadedImage && (
+      {step === 2 && selectedImage && (
         <div className="card">
           <div className="card-header">
             <h2 className="text-xl font-semibold text-gray-900">Assessment Details</h2>
@@ -190,18 +179,14 @@ const Assessment = () => {
             </p>
           </div>
 
-          {/* Uploaded Image Preview */}
+          {/* Selected Image Preview */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Uploaded Image</h3>
+            <h3 className="text-sm font-medium text-gray-900 mb-2">Selected Image</h3>
             <div className="w-48 h-48 rounded-lg overflow-hidden bg-gray-100">
               <img
-                src={getFileUrl(uploadedImage.url)}
-                alt="Uploaded vehicle"
+                src={selectedImage.preview}
+                alt="Selected vehicle"
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  console.error('Image failed to load:', uploadedImage.url);
-                  console.error('Computed URL:', getFileUrl(uploadedImage.url));
-                }}
               />
             </div>
           </div>
@@ -290,16 +275,18 @@ const Assessment = () => {
             </div>
 
             {/* Analyzed Image */}
-            <div className="mb-6">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Analyzed Image</h3>
-              <div className="w-full max-w-2xl mx-auto rounded-lg overflow-hidden bg-gray-100">
-                <img
-                  src={getFileUrl(uploadedImage.url)}
-                  alt="Analyzed vehicle"
-                  className="w-full h-auto object-contain"
-                />
+            {selectedImage && (
+              <div className="mb-6">
+                <h3 className="text-sm font-medium text-gray-900 mb-3">Analyzed Image</h3>
+                <div className="w-full max-w-2xl mx-auto rounded-lg overflow-hidden bg-gray-100">
+                  <img
+                    src={selectedImage.preview}
+                    alt="Analyzed vehicle"
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Analysis Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

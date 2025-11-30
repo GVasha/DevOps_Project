@@ -6,7 +6,6 @@
 
 const { v4: uuidv4 } = require('uuid');
 const FileStorage = require('../utils/fileStorage');
-const { getFilePath, extractFilenameFromUrl } = require('../utils/fileHelper');
 const { ASSESSMENT } = require('../config/constants');
 
 class AssessmentService {
@@ -15,14 +14,12 @@ class AssessmentService {
   }
 
   /**
-   * Creates a new assessment
+   * Creates a new assessment (no image saving required)
    */
-  createAssessment(userId, imageUrl, description, location, aiAnalysis) {
+  createAssessment(userId, description, location, aiAnalysis) {
     const assessment = {
       id: uuidv4(),
       userId,
-      imageUrl,
-      imagePath: getFilePath(extractFilenameFromUrl(imageUrl)),
       description: description || '',
       location: location || '',
       aiAnalysis,

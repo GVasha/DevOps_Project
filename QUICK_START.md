@@ -68,7 +68,7 @@ git commit -m "Initial commit - Ready for deployment"
    - Add:
      - **Name**: `REACT_APP_API_URL`
      - **Value**: `https://your-backend-url.com/api` (you'll update this after deploying backend)
-     - For now, you can use: `http://localhost:5000/api` (for testing)
+     - For now, you can use: `https://insurance-backend-latest.onrender.com/api` (for testing)
 
 5. **Deploy**:
    - Click **"Deploy"**

@@ -15,7 +15,7 @@ RUN npm ci && \
 COPY . .
 
 # Build arguments for environment variables
-ARG REACT_APP_API_URL=http://localhost:5000/api
+ARG REACT_APP_API_URL=https://insurance-backend-latest.onrender.com/api
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 # Build the application

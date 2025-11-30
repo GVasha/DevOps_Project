@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
     }
   };
   
-  return successResponse(res, healthData, 'Service is healthy');
+  return successResponse(res, 200, 'Service is healthy', healthData);
 });
 
 module.exports = router;

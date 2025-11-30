@@ -232,7 +232,7 @@ npm run client
 ### Step 5: Verify Installation
 
 1. Open http://localhost:3000 in your browser
-2. Check backend health: http://localhost:5000/api/health
+2. Check backend health: https://insurance-backend-latest.onrender.com/api/health
 3. You should see the login page and a healthy API response
 
 ---
@@ -343,7 +343,7 @@ docker-compose down
 
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:5000
-- **Health Check**: http://localhost:5000/api/health
+- **Health Check**: https://insurance-backend-latest.onrender.com/api/health
 
 ### Individual Container Builds
 
@@ -375,7 +375,7 @@ docker run -d \
 cd frontend
 
 # Build the image
-docker build --build-arg REACT_APP_API_URL=http://localhost:5000/api -t insurance-frontend .
+docker build --build-arg REACT_APP_API_URL=https://insurance-backend-latest.onrender.com/api -t insurance-frontend .
 
 # Run the container
 docker run -d \
@@ -488,6 +488,26 @@ For a quick production deployment:
    - **Heroku**: Traditional PaaS option
 
 📖 **For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+### Azure Deployment
+
+Deploy to Microsoft Azure using containerized services:
+
+**Quick Start:**
+```powershell
+# Generate JWT secret
+$jwtSecret = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 64 | % {[char]$_})
+
+# Run quick deployment script
+.\azure-quickstart.ps1 -JwtSecret $jwtSecret -OpenAiApiKey "your-key-here"
+```
+
+**Options:**
+- **Azure Container Apps** (Recommended) - Modern serverless containers
+- **Azure App Service** - Traditional PaaS with containers
+- **Azure Container Instances** - Simple container hosting
+
+📖 **For comprehensive Azure deployment guide, see [AZURE_DEPLOYMENT.md](./AZURE_DEPLOYMENT.md)**
 
 ### Pre-Deployment Checklist
 
@@ -728,7 +748,7 @@ Returns Prometheus-compatible metrics in text format.
 **Example Query:**
 
 ```bash
-curl http://localhost:5000/api/metrics
+curl https://insurance-backend-latest.onrender.com/api/metrics
 ```
 
 ### Prometheus Integration

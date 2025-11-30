@@ -22,7 +22,7 @@ Edit `.env` and set the required environment variables:
 - `JWT_SECRET`: A secure random string for JWT token signing (required)
 - `OPENAI_API_KEY`: Your OpenAI API key (optional, app will use basic analysis if not provided)
 - `CORS_ORIGIN`: Frontend URL for CORS (default: http://localhost:3000)
-- `REACT_APP_API_URL`: Backend API URL (default: http://localhost:5000/api)
+- `REACT_APP_API_URL`: Backend API URL (default: https://insurance-backend-latest.onrender.com/api)
 
 ### 2. Build and Run with Docker Compose
 
@@ -69,7 +69,7 @@ docker run -d \
 ```bash
 # Build the frontend image
 cd frontend
-docker build --build-arg REACT_APP_API_URL=http://localhost:5000/api -t insurance-frontend .
+docker build --build-arg REACT_APP_API_URL=https://insurance-backend-latest.onrender.com/api -t insurance-frontend .
 
 # Run the frontend container
 docker run -d \
@@ -129,7 +129,7 @@ docker-compose top
 
 | Variable | Description | Required | Default |
 |----------|-------------|----------|---------|
-| `REACT_APP_API_URL` | Backend API URL | No | `http://localhost:5000/api` |
+| `REACT_APP_API_URL` | Backend API URL | No | `https://insurance-backend-latest.onrender.com/api` |
 
 **Note:** Frontend environment variables must be set at build time using `--build-arg` when building the Docker image.
 
@@ -249,7 +249,7 @@ docker-compose up -d --build
 
 Both containers include health checks:
 
-- **Backend**: `http://localhost:5000/api/health`
+- **Backend**: `https://insurance-backend-latest.onrender.com/api/health`
 - **Frontend**: `http://localhost:3000/health`
 
 Check health status:

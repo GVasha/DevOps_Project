@@ -44,7 +44,7 @@ Write-Host ""
 Write-Host "📍 Access the application:" -ForegroundColor Cyan
 Write-Host "   Frontend: http://localhost:3000"
 Write-Host "   Backend API: http://localhost:5000"
-Write-Host "   Health Check: http://localhost:5000/api/health"
+Write-Host "   Health Check: https://insurance-backend-latest.onrender.com/api/health"
 Write-Host ""
 Write-Host "📝 View logs: docker-compose logs -f" -ForegroundColor Gray
 Write-Host "🛑 Stop services: docker-compose down" -ForegroundColor Gray

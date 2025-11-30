@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://insurance-backend-latest.onrender.com/api';
 const FILE_BASE_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
 // Create axios instance with default config
@@ -73,7 +73,13 @@ export const uploadAPI = {
 
 // Assessment API calls
 export const assessmentAPI = {
-  analyzeImage: (data) => api.post('/assessment/analyze', data),
+  analyzeImage: (formData) => {
+    return api.post('/assessment/analyze', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
   getMyAssessments: () => api.get('/assessment/my-assessments'),
   getAssessment: (id) => api.get(`/assessment/assessment/${id}`),
   createClaim: (claimData) => api.post('/assessment/create-claim', claimData),

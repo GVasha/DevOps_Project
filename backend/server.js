@@ -27,6 +27,10 @@ const { SERVER } = require('./config/constants');
 const app = express();
 const PORT = process.env.PORT || SERVER.DEFAULT_PORT;
 
+// Trust proxy - required when running behind a proxy (e.g., Render.com, Heroku)
+// This must be set before rate limiting middleware
+app.set('trust proxy', true);
+
 // Security middleware
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },

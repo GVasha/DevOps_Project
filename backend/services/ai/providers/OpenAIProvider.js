@@ -30,10 +30,17 @@ class OpenAIProvider extends AIProvider {
   }
 
   /**
-   * Reads and encodes image to base64
+   * Reads and encodes image to base64 from file path
    */
   encodeImageToBase64(imagePath) {
     const imageBuffer = fs.readFileSync(imagePath);
+    return imageBuffer.toString('base64');
+  }
+
+  /**
+   * Encodes image buffer to base64
+   */
+  encodeBufferToBase64(imageBuffer) {
     return imageBuffer.toString('base64');
   }
 
@@ -74,12 +81,19 @@ Provide your complete assessment now.`;
   }
 
   /**
-   * Makes API request to OpenAI
+   * Makes API request to OpenAI with file path
    */
   async makeAPIRequest(imagePath) {
     const base64Image = this.encodeImageToBase64(imagePath);
     const mimeType = getMimeType(imagePath);
 
+    return this.makeAPIRequestWithBase64(base64Image, mimeType);
+  }
+
+  /**
+   * Makes API request to OpenAI with base64 image
+   */
+  async makeAPIRequestWithBase64(base64Image, mimeType) {
     const response = await axios.post(
       AI.OPENAI_API_URL,
       {
@@ -115,7 +129,7 @@ Provide your complete assessment now.`;
   }
 
   /**
-   * Analyzes car damage using OpenAI Vision API
+   * Analyzes car damage using OpenAI Vision API from file path
    */
   async analyzeCarDamage(imagePath) {
     if (!this.isConfigured()) {
@@ -124,6 +138,30 @@ Provide your complete assessment now.`;
 
     try {
       const analysis = await this.makeAPIRequest(imagePath);
+      return {
+        success: true,
+        rawAnalysis: analysis,
+        provider: this.getName()
+      };
+    } catch (error) {
+      const status = error.response?.status;
+      const providerMsg = error.response?.data?.error?.message || error.message;
+      console.error('OpenAI analysis error:', { status, message: providerMsg });
+      throw new Error(`AI analysis failed: ${providerMsg}`);
+    }
+  }
+
+  /**
+   * Analyzes car damage using OpenAI Vision API from buffer
+   */
+  async analyzeCarDamageFromBuffer(imageBuffer, mimeType) {
+    if (!this.isConfigured()) {
+      throw new Error('OpenAI API key not configured');
+    }
+
+    try {
+      const base64Image = this.encodeBufferToBase64(imageBuffer);
+      const analysis = await this.makeAPIRequestWithBase64(base64Image, mimeType);
       return {
         success: true,
         rawAnalysis: analysis,

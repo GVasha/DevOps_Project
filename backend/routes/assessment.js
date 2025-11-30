@@ -4,47 +4,101 @@
  */
 
 const express = require('express');
-const fs = require('fs');
+const multer = require('multer');
 const { body } = require('express-validator');
 const { authenticateToken } = require('../middleware/auth');
 const { handleValidationErrors } = require('../utils/validationHelper');
 const { successResponse, errorResponse } = require('../utils/responseHelper');
-const { getFilePath, extractFilenameFromUrl } = require('../utils/fileHelper');
-const { USER } = require('../config/constants');
+const { USER, UPLOAD } = require('../config/constants');
 const assessmentService = require('../services/AssessmentService');
 const claimService = require('../services/ClaimService');
 const aiService = require('../services/aiService');
 
 const router = express.Router();
 
-// Create new damage assessment
-router.post('/analyze', authenticateToken, [
-  body('imageUrl').notEmpty().withMessage('Image URL is required'),
-  body('description').optional().isLength({ max: USER.DESCRIPTION_MAX_LENGTH })
-    .withMessage(`Description must not exceed ${USER.DESCRIPTION_MAX_LENGTH} characters`),
-  body('location').optional().isLength({ max: USER.LOCATION_MAX_LENGTH })
-    .withMessage(`Location must not exceed ${USER.LOCATION_MAX_LENGTH} characters`)
-], async (req, res) => {
-  try {
-    const validationError = handleValidationErrors(req, res);
-    if (validationError) return validationError;
+// Configure multer for memory storage (no file saving)
+const memoryStorage = multer.memoryStorage();
 
-    const { imageUrl, description, location } = req.body;
-    const filename = extractFilenameFromUrl(imageUrl);
-    const imagePath = getFilePath(filename);
+// File filter for images only
+const fileFilter = (req, file, cb) => {
+  const extname = UPLOAD.ALLOWED_IMAGE_TYPES.some(type => 
+    file.originalname.toLowerCase().endsWith(`.${type}`)
+  );
+  const mimetype = UPLOAD.ALLOWED_MIME_TYPES.includes(file.mimetype);
 
-    // Verify file exists
-    if (!fs.existsSync(imagePath)) {
-      return errorResponse(res, 404, 'Image file not found');
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb(new Error(`Only image files are allowed (${UPLOAD.ALLOWED_IMAGE_TYPES.join(', ')})`));
+  }
+};
+
+// Configure multer with memory storage
+const upload = multer({
+  storage: memoryStorage,
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || UPLOAD.MAX_FILE_SIZE,
+    files: 1
+  },
+  fileFilter: fileFilter
+});
+
+// Wrapper to handle multer errors
+const uploadSingle = (req, res, next) => {
+  upload.single('image')(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      const errorMessages = {
+        'LIMIT_FILE_SIZE': `File too large. Maximum size is ${UPLOAD.MAX_FILE_SIZE / (1024 * 1024)}MB.`,
+        'LIMIT_FILE_COUNT': 'Too many files. Only one image allowed per request.',
+        'LIMIT_UNEXPECTED_FILE': 'Unexpected field name for file upload. Use "image" as the field name.'
+      };
+      
+      const message = errorMessages[err.code] || err.message;
+      return errorResponse(res, 400, message);
+    }
+    
+    if (err && err.message && err.message.includes('Only image files are allowed')) {
+      return errorResponse(res, 400, err.message);
     }
 
-    // Perform AI analysis
-    const aiResult = await aiService.analyzeCarDamage(imagePath);
+    if (err) {
+      return errorResponse(res, 400, err.message || 'File upload error');
+    }
 
-    // Create assessment record
+    next();
+  });
+};
+
+// Create new damage assessment
+router.post('/analyze', authenticateToken, uploadSingle, async (req, res) => {
+  try {
+    // Check if file was uploaded
+    if (!req.file) {
+      return errorResponse(res, 400, 'No image file provided');
+    }
+
+    // Validate description and location (after multer processes the form data)
+    const description = req.body.description ? String(req.body.description).trim() : '';
+    const location = req.body.location ? String(req.body.location).trim() : '';
+
+    // Manual validation for FormData fields
+    if (description && description.length > USER.DESCRIPTION_MAX_LENGTH) {
+      return errorResponse(res, 400, `Description must not exceed ${USER.DESCRIPTION_MAX_LENGTH} characters`);
+    }
+
+    if (location && location.length > USER.LOCATION_MAX_LENGTH) {
+      return errorResponse(res, 400, `Location must not exceed ${USER.LOCATION_MAX_LENGTH} characters`);
+    }
+
+    // Perform AI analysis with buffer
+    const aiResult = await aiService.analyzeCarDamageFromBuffer(
+      req.file.buffer,
+      req.file.mimetype
+    );
+
+    // Create assessment record (no imageUrl or imagePath needed)
     const assessment = assessmentService.createAssessment(
       req.user.id,
-      imageUrl,
       description,
       location,
       aiResult

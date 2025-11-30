@@ -42,6 +42,31 @@ class AIService {
   }
 
   /**
+   * Analyzes car damage from image buffer (no file saving)
+   */
+  async analyzeCarDamageFromBuffer(imageBuffer, mimeType) {
+    try {
+      // Try OpenAI first if configured
+      if (this.openaiProvider.isConfigured()) {
+        try {
+          const result = await this.openaiProvider.analyzeCarDamageFromBuffer(imageBuffer, mimeType);
+          return this.processAnalysisResult(result);
+        } catch (openaiError) {
+          console.warn('OpenAI analysis failed, falling back to basic analysis:', openaiError.message);
+        }
+      }
+
+      // Fallback to basic analysis
+      const result = await this.basicProvider.analyzeCarDamageFromBuffer(imageBuffer, mimeType);
+      return this.processAnalysisResult(result);
+
+    } catch (error) {
+      console.error('All analysis methods failed:', error);
+      return this.createErrorResponse(error.message);
+    }
+  }
+
+  /**
    * Processes raw analysis result from provider
    */
   processAnalysisResult(result) {
