@@ -1,0 +1,39 @@
+# Prometheus configuration file
+global:
+  scrape_interval: 15s # How frequently to scrape targets
+  evaluation_interval: 15s # How frequently to evaluate rules
+  external_labels:
+    cluster: 'insurance-api'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  # - "alert_rules.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+
+  # Insurance API Backend
+  - job_name: 'insurance-api'
+    metrics_path: '/api/metrics'
+    static_configs:
+      - targets: ['backend:5000']
+        labels:
+          service: 'insurance-backend'
+          environment: 'production'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
