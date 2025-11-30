@@ -1,23 +1,28 @@
+/**
+ * File upload routes
+ * Refactored to remove duplication and use constants
+ */
+
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const { authenticateToken } = require('../middleware/auth');
+const { successResponse, errorResponse } = require('../utils/responseHelper');
+const { getUploadDir, ensureDirectoryExists } = require('../utils/fileHelper');
+const { UPLOAD } = require('../config/constants');
 
 const router = express.Router();
 
-// Configure multer for file uploads
+// Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../uploads');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
+    const uploadDir = getUploadDir();
+    ensureDirectoryExists(uploadDir);
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    // Generate unique filename with original extension
     const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
   }
@@ -25,14 +30,15 @@ const storage = multer.diskStorage({
 
 // File filter for images only
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif|webp/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = allowedTypes.test(file.mimetype);
+  const extname = UPLOAD.ALLOWED_IMAGE_TYPES.some(type => 
+    file.originalname.toLowerCase().endsWith(`.${type}`)
+  );
+  const mimetype = UPLOAD.ALLOWED_MIME_TYPES.includes(file.mimetype);
 
   if (mimetype && extname) {
     return cb(null, true);
   } else {
-    cb(new Error('Only image files are allowed (jpeg, jpg, png, gif, webp)'));
+    cb(new Error(`Only image files are allowed (${UPLOAD.ALLOWED_IMAGE_TYPES.join(', ')})`));
   }
 };
 
@@ -40,77 +46,60 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024, // 10MB default
-    files: 5 // Maximum 5 files per request
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || UPLOAD.MAX_FILE_SIZE,
+    files: UPLOAD.MAX_FILES_PER_REQUEST
   },
   fileFilter: fileFilter
+});
+
+/**
+ * Creates file info object
+ */
+const createFileInfo = (file, userId) => ({
+  id: uuidv4(),
+  originalName: file.originalname,
+  filename: file.filename,
+  path: file.path,
+  size: file.size,
+  mimetype: file.mimetype,
+  uploadedBy: userId,
+  uploadedAt: new Date().toISOString(),
+  url: `/uploads/${file.filename}`
 });
 
 // Upload single image
 router.post('/single', authenticateToken, upload.single('image'), (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({
-        error: 'No image file provided'
-      });
+      return errorResponse(res, 400, 'No image file provided');
     }
 
-    const fileInfo = {
-      id: uuidv4(),
-      originalName: req.file.originalname,
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size,
-      mimetype: req.file.mimetype,
-      uploadedBy: req.user.id,
-      uploadedAt: new Date().toISOString(),
-      url: `/uploads/${req.file.filename}`
-    };
-
-    res.status(201).json({
-      message: 'Image uploaded successfully',
+    const fileInfo = createFileInfo(req.file, req.user.id);
+    return successResponse(res, 201, 'Image uploaded successfully', {
       file: fileInfo
     });
 
   } catch (error) {
     console.error('Single upload error:', error);
-    res.status(500).json({
-      error: 'Failed to upload image'
-    });
+    return errorResponse(res, 500, 'Failed to upload image');
   }
 });
 
 // Upload multiple images
-router.post('/multiple', authenticateToken, upload.array('images', 5), (req, res) => {
+router.post('/multiple', authenticateToken, upload.array('images', UPLOAD.MAX_FILES_PER_REQUEST), (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
-      return res.status(400).json({
-        error: 'No image files provided'
-      });
+      return errorResponse(res, 400, 'No image files provided');
     }
 
-    const filesInfo = req.files.map(file => ({
-      id: uuidv4(),
-      originalName: file.originalname,
-      filename: file.filename,
-      path: file.path,
-      size: file.size,
-      mimetype: file.mimetype,
-      uploadedBy: req.user.id,
-      uploadedAt: new Date().toISOString(),
-      url: `/uploads/${file.filename}`
-    }));
-
-    res.status(201).json({
-      message: `${req.files.length} images uploaded successfully`,
+    const filesInfo = req.files.map(file => createFileInfo(file, req.user.id));
+    return successResponse(res, 201, `${req.files.length} images uploaded successfully`, {
       files: filesInfo
     });
 
   } catch (error) {
     console.error('Multiple upload error:', error);
-    res.status(500).json({
-      error: 'Failed to upload images'
-    });
+    return errorResponse(res, 500, 'Failed to upload images');
   }
 });
 
@@ -118,17 +107,14 @@ router.post('/multiple', authenticateToken, upload.array('images', 5), (req, res
 router.get('/file/:filename', authenticateToken, (req, res) => {
   try {
     const filename = req.params.filename;
-    const filePath = path.join(__dirname, '../uploads', filename);
+    const filePath = path.join(getUploadDir(), filename);
 
     if (!fs.existsSync(filePath)) {
-      return res.status(404).json({
-        error: 'File not found'
-      });
+      return errorResponse(res, 404, 'File not found');
     }
 
     const stats = fs.statSync(filePath);
-    
-    res.json({
+    return successResponse(res, 200, null, {
       filename: filename,
       size: stats.size,
       uploadedAt: stats.birthtime,
@@ -137,9 +123,7 @@ router.get('/file/:filename', authenticateToken, (req, res) => {
 
   } catch (error) {
     console.error('File info error:', error);
-    res.status(500).json({
-      error: 'Failed to get file information'
-    });
+    return errorResponse(res, 500, 'Failed to get file information');
   }
 });
 
@@ -147,53 +131,38 @@ router.get('/file/:filename', authenticateToken, (req, res) => {
 router.delete('/file/:filename', authenticateToken, (req, res) => {
   try {
     const filename = req.params.filename;
-    const filePath = path.join(__dirname, '../uploads', filename);
+    const filePath = path.join(getUploadDir(), filename);
 
     if (!fs.existsSync(filePath)) {
-      return res.status(404).json({
-        error: 'File not found'
-      });
+      return errorResponse(res, 404, 'File not found');
     }
 
     fs.unlinkSync(filePath);
-
-    res.json({
-      message: 'File deleted successfully',
+    return successResponse(res, 200, 'File deleted successfully', {
       filename: filename
     });
 
   } catch (error) {
     console.error('File deletion error:', error);
-    res.status(500).json({
-      error: 'Failed to delete file'
-    });
+    return errorResponse(res, 500, 'Failed to delete file');
   }
 });
 
 // Error handling middleware for multer
 router.use((error, req, res, next) => {
   if (error instanceof multer.MulterError) {
-    if (error.code === 'LIMIT_FILE_SIZE') {
-      return res.status(400).json({
-        error: 'File too large. Maximum size is 10MB.'
-      });
-    }
-    if (error.code === 'LIMIT_FILE_COUNT') {
-      return res.status(400).json({
-        error: 'Too many files. Maximum is 5 files per request.'
-      });
-    }
-    if (error.code === 'LIMIT_UNEXPECTED_FILE') {
-      return res.status(400).json({
-        error: 'Unexpected field name for file upload.'
-      });
-    }
+    const errorMessages = {
+      'LIMIT_FILE_SIZE': `File too large. Maximum size is ${UPLOAD.MAX_FILE_SIZE / (1024 * 1024)}MB.`,
+      'LIMIT_FILE_COUNT': `Too many files. Maximum is ${UPLOAD.MAX_FILES_PER_REQUEST} files per request.`,
+      'LIMIT_UNEXPECTED_FILE': 'Unexpected field name for file upload.'
+    };
+    
+    const message = errorMessages[error.code] || error.message;
+    return errorResponse(res, 400, message);
   }
   
-  if (error.message.includes('Only image files are allowed')) {
-    return res.status(400).json({
-      error: error.message
-    });
+  if (error.message && error.message.includes('Only image files are allowed')) {
+    return errorResponse(res, 400, error.message);
   }
 
   next(error);

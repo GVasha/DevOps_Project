@@ -929,5 +929,230 @@
     "status": "completed",
     "createdAt": "2025-10-05T16:07:28.167Z",
     "updatedAt": "2025-10-05T16:07:28.167Z"
+  },
+  {
+    "id": "2d0ae5ba-f9b7-4396-8468-32c017702cee",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/41fba3e5-631d-4677-b2ab-031c3954e20c.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\41fba3e5-631d-4677-b2ab-031c3954e20c.jpg",
+    "description": "crashed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Severe",
+        "damageTypes": [
+          "dents",
+          "broken parts",
+          "structural damage",
+          "paint damage"
+        ],
+        "costCategory": "Very High",
+        "costRange": "$5000+",
+        "affectedAreas": [
+          "front bumper",
+          "hood",
+          "fenders",
+          "headlights"
+        ],
+        "safetyConcerns": "Potential structural damage compromising vehicle integrity",
+        "confidence": 9,
+        "summary": "The front end of the vehicle has severe damage, suggesting a high-compensation repair job. The hood is crumpled, and the front bumper and headlights exhibit major damage. Structural integrity may be compromised, necessitating expert inspection."
+      },
+      "provider": "OpenAI GPT-4 Vision"
+    },
+    "status": "completed",
+    "createdAt": "2025-10-05T18:16:44.100Z",
+    "updatedAt": "2025-10-05T18:16:44.100Z"
+  },
+  {
+    "id": "971837d9-b0b1-4850-a2e7-7271ad597861",
+    "userId": "user-1",
+    "imageUrl": "/uploads/test2.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\test2.jpg",
+    "description": "Second",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {}
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T15:02:46.820Z",
+    "updatedAt": "2025-11-30T15:02:46.821Z"
+  },
+  {
+    "id": "6894a01e-607a-44aa-9d44-dc323c54750f",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/d87691c2-10f7-450f-a1ac-e17cd9798084.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\d87691c2-10f7-450f-a1ac-e17cd9798084.jpg",
+    "description": "ye I crashed hard",
+    "location": "Spain",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T15:51:18.580Z",
+    "updatedAt": "2025-11-30T15:51:18.580Z"
+  },
+  {
+    "id": "6854e012-8f3d-47c1-90bc-b5ee27ef69e6",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/9cfda4a8-62a6-4048-8e8b-922d396403b5.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\9cfda4a8-62a6-4048-8e8b-922d396403b5.jpg",
+    "description": "crashed innit",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T15:58:05.227Z",
+    "updatedAt": "2025-11-30T15:58:05.227Z"
+  },
+  {
+    "id": "a7a36bbb-4ee0-4223-9246-d307e9a9dc92",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/d501ada8-1502-4c33-b947-4eab83faaba1.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\d501ada8-1502-4c33-b947-4eab83faaba1.jpg",
+    "description": "crasjed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T16:02:59.932Z",
+    "updatedAt": "2025-11-30T16:02:59.932Z"
+  },
+  {
+    "id": "fce72e80-720c-4de0-afc3-cc77611be8af",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/d424c072-2865-4c82-ade4-44f47bae439c.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\d424c072-2865-4c82-ade4-44f47bae439c.jpg",
+    "description": "crashed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T16:04:44.033Z",
+    "updatedAt": "2025-11-30T16:04:44.033Z"
+  },
+  {
+    "id": "08af4c78-34ef-439a-ae9c-8f513682ef28",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/86822cf3-9718-46ca-ad26-898ce51595cc.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\86822cf3-9718-46ca-ad26-898ce51595cc.jpg",
+    "description": "cr",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T16:08:27.112Z",
+    "updatedAt": "2025-11-30T16:08:27.112Z"
+  },
+  {
+    "id": "9d63a1ef-f38c-4c23-b39d-bd0a98154b03",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/b2aa7bdf-dd6a-4047-b87e-3f8b01ccc45a.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\b2aa7bdf-dd6a-4047-b87e-3f8b01ccc45a.jpg",
+    "description": "crashed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T16:10:47.684Z",
+    "updatedAt": "2025-11-30T16:10:47.684Z"
+  },
+  {
+    "id": "bd78da96-1602-4b2d-900f-6528e2d60e7d",
+    "userId": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "imageUrl": "/uploads/b0b634dc-6c88-455b-a1ae-b2f7a3fcb50e.jpg",
+    "imagePath": "C:\\Users\\grego\\Desktop\\DevOps Insurance\\backend\\uploads\\b0b634dc-6c88-455b-a1ae-b2f7a3fcb50e.jpg",
+    "description": "crashed",
+    "location": "",
+    "aiAnalysis": {
+      "success": true,
+      "analysis": {
+        "severity": "Unknown",
+        "damageTypes": [],
+        "costCategory": "Unknown",
+        "affectedAreas": [],
+        "safetyConcerns": null,
+        "confidence": 0,
+        "summary": "[object Object]"
+      },
+      "provider": "Basic Analysis (Demo)",
+      "note": "This is a demonstration. Configure AI API keys for accurate analysis."
+    },
+    "status": "completed",
+    "createdAt": "2025-11-30T16:15:22.757Z",
+    "updatedAt": "2025-11-30T16:15:22.757Z"
   }
 ]

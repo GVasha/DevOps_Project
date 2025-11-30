@@ -1,3 +1,8 @@
+/**
+ * Express server setup
+ * Refactored to use constants and centralized error handling
+ */
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -5,40 +10,58 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 require('dotenv').config();
 
-// Debug: Check if environment variables are loaded
-console.log('🔑 OpenAI API Key loaded:', process.env.OPENAI_API_KEY ? 'YES (Hidden)' : 'NO - MISSING!');
-
 // Import routes
 const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');
 const assessmentRoutes = require('./routes/assessment');
+const healthRoutes = require('./routes/health');
+const metricsRoutes = require('./routes/metrics');
+
+// Import middleware
+const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
+const { metricsMiddleware } = require('./middleware/metrics');
+
+// Import constants
+const { SERVER } = require('./config/constants');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || SERVER.DEFAULT_PORT;
 
 // Security middleware
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" },
-  contentSecurityPolicy: false, // Disable CSP for development
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  contentSecurityPolicy: false // Disable CSP for development
 }));
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-domain.com'] 
-    : ['http://localhost:3000'],
+  origin: process.env.CORS_ORIGIN 
+    ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+    : process.env.NODE_ENV === 'production' 
+      ? ['https://your-domain.com'] 
+      : ['http://localhost:3000'],
   credentials: true
 }));
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: SERVER.RATE_LIMIT_WINDOW_MS,
+  max: SERVER.RATE_LIMIT_MAX_REQUESTS,
   message: 'Too many requests from this IP, please try again later.'
 });
 app.use('/api/', limiter);
 
 // Body parsing middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: SERVER.JSON_BODY_LIMIT }));
+app.use(express.urlencoded({ extended: true, limit: SERVER.URL_ENCODED_LIMIT }));
+
+// Metrics middleware (should be before routes to capture all requests)
+// Exclude metrics endpoint itself from metrics collection
+app.use((req, res, next) => {
+  if (req.path === '/api/metrics') {
+    return next();
+  }
+  metricsMiddleware(req, res, next);
+});
 
 // Static file serving for uploads
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -47,33 +70,22 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/assessment', assessmentRoutes);
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'OK', 
-    message: 'Insurance API is running',
-    timestamp: new Date().toISOString()
-  });
-});
+app.use('/api/health', healthRoutes);
+app.use('/api/metrics', metricsRoutes);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(err.status || 500).json({
-    error: process.env.NODE_ENV === 'production' 
-      ? 'Something went wrong!' 
-      : err.message
-  });
-});
+app.use(errorHandler);
 
 // 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
-});
+app.use('*', notFoundHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Insurance API server running on port ${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-});
+// Only start server if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Insurance API server running on port ${PORT}`);
+    console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+  });
+}
+
+module.exports = app;

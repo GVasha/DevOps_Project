@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "06d68b15-a5f0-4686-b694-0f51530b1f37",
+    "email": "giovasha2005@gmail.com",
+    "password": "$2a$12$.Y1lRlbBO9hcKbI2bPnHV.rmqWOmD7Ec/Ys0IjT/xmXFritHKuZ6.",
+    "name": "George Vashakidze",
+    "phone": "577550525",
+    "createdAt": "2025-10-05T18:16:27.165Z",
+    "updatedAt": "2025-10-05T18:16:27.165Z"
+  }
+]

@@ -1,22 +1,15 @@
+/**
+ * Authentication middleware
+ * Refactored to use service layer and constants
+ */
+
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+const userService = require('../services/UserService');
+const { JWT } = require('../config/constants');
 
-// Helper function to read users from JSON file
-const getUsersFromFile = () => {
-  try {
-    const usersPath = path.join(__dirname, '../data/users.json');
-    if (fs.existsSync(usersPath)) {
-      const data = fs.readFileSync(usersPath, 'utf8');
-      return JSON.parse(data);
-    }
-    return [];
-  } catch (error) {
-    console.error('Error reading users file:', error);
-    return [];
-  }
-};
-
+/**
+ * Authenticates JWT token and verifies user exists
+ */
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
@@ -31,8 +24,7 @@ const authenticateToken = (req, res, next) => {
     }
 
     // Verify user still exists
-    const users = getUsersFromFile();
-    const user = users.find(u => u.id === decoded.userId);
+    const user = userService.getUserById(decoded.userId);
     
     if (!user) {
       return res.status(403).json({ error: 'User not found' });
@@ -48,11 +40,14 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+/**
+ * Generates JWT token
+ */
 const generateToken = (userId, email) => {
   return jwt.sign(
     { userId, email },
     process.env.JWT_SECRET,
-    { expiresIn: '24h' }
+    { expiresIn: JWT.EXPIRES_IN }
   );
 };
 

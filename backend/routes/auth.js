@@ -1,12 +1,17 @@
+/**
+ * Authentication routes
+ * Refactored to use service layer and remove duplication
+ */
+
 const express = require('express');
-const bcrypt = require('bcryptjs');
-const { body, validationResult } = require('express-validator');
-const { v4: uuidv4 } = require('uuid');
+const { body } = require('express-validator');
 const { generateToken, authenticateToken } = require('../middleware/auth');
-const FileStorage = require('../utils/fileStorage');
+const { handleValidationErrors } = require('../utils/validationHelper');
+const { successResponse, errorResponse, removePassword } = require('../utils/responseHelper');
+const { USER } = require('../config/constants');
+const userService = require('../services/UserService');
 
 const router = express.Router();
-const userStorage = new FileStorage('users.json');
 
 // Validation rules
 const registerValidation = [
@@ -15,14 +20,14 @@ const registerValidation = [
     .normalizeEmail()
     .withMessage('Please provide a valid email'),
   body('password')
-    .isLength({ min: 8 })
-    .withMessage('Password must be at least 8 characters long')
+    .isLength({ min: USER.PASSWORD_MIN_LENGTH })
+    .withMessage(`Password must be at least ${USER.PASSWORD_MIN_LENGTH} characters long`)
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
     .withMessage('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
   body('name')
     .trim()
-    .isLength({ min: 2, max: 50 })
-    .withMessage('Name must be between 2 and 50 characters'),
+    .isLength({ min: USER.NAME_MIN_LENGTH, max: USER.NAME_MAX_LENGTH })
+    .withMessage(`Name must be between ${USER.NAME_MIN_LENGTH} and ${USER.NAME_MAX_LENGTH} characters`),
   body('phone')
     .optional()
     .isMobilePhone()
@@ -42,138 +47,69 @@ const loginValidation = [
 // Register endpoint
 router.post('/register', registerValidation, async (req, res) => {
   try {
-    // Check validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        error: 'Validation failed',
-        details: errors.array()
-      });
-    }
+    const validationError = handleValidationErrors(req, res);
+    if (validationError) return validationError;
 
     const { email, password, name, phone } = req.body;
+    const result = await userService.createUser(email, password, name, phone);
 
-    // Check if user already exists
-    const existingUser = userStorage.findByEmail(email);
-    if (existingUser) {
-      return res.status(409).json({
-        error: 'User already exists with this email'
-      });
+    if (result.error) {
+      const statusCode = result.error.includes('already exists') ? 409 : 500;
+      return errorResponse(res, statusCode, result.error);
     }
 
-    // Hash password securely
-    const saltRounds = 12;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-    // Create new user
-    const newUser = {
-      id: uuidv4(),
-      email,
-      password: hashedPassword,
-      name,
-      phone: phone || null,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-
-    // Save user to file
-    const saved = userStorage.append(newUser);
-    if (!saved) {
-      return res.status(500).json({
-        error: 'Failed to create user account'
-      });
-    }
-
-    // Generate JWT token
-    const token = generateToken(newUser.id, newUser.email);
-
-    // Return user data (without password)
-    const { password: _, ...userWithoutPassword } = newUser;
-    
-    res.status(201).json({
-      message: 'User registered successfully',
-      user: userWithoutPassword,
+    const token = generateToken(result.id, result.email);
+    return successResponse(res, 201, 'User registered successfully', {
+      user: removePassword(result),
       token
     });
 
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({
-      error: 'Internal server error during registration'
-    });
+    return errorResponse(res, 500, 'Internal server error during registration');
   }
 });
 
 // Login endpoint
 router.post('/login', loginValidation, async (req, res) => {
   try {
-    // Check validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        error: 'Validation failed',
-        details: errors.array()
-      });
-    }
+    const validationError = handleValidationErrors(req, res);
+    if (validationError) return validationError;
 
     const { email, password } = req.body;
+    const result = await userService.authenticateUser(email, password);
 
-    // Find user by email
-    const user = userStorage.findByEmail(email);
-    if (!user) {
-      return res.status(401).json({
-        error: 'Invalid credentials'
-      });
+    if (result.error) {
+      return errorResponse(res, 401, result.error);
     }
 
-    // Verify password
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(401).json({
-        error: 'Invalid credentials'
-      });
-    }
-
-    // Generate JWT token
-    const token = generateToken(user.id, user.email);
-
-    // Return user data (without password)
-    const { password: _, ...userWithoutPassword } = user;
-    
-    res.json({
-      message: 'Login successful',
-      user: userWithoutPassword,
+    const token = generateToken(result.user.id, result.user.email);
+    return successResponse(res, 200, 'Login successful', {
+      user: removePassword(result.user),
       token
     });
 
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({
-      error: 'Internal server error during login'
-    });
+    return errorResponse(res, 500, 'Internal server error during login');
   }
 });
 
 // Get current user profile
 router.get('/profile', authenticateToken, (req, res) => {
   try {
-    const user = userStorage.findById(req.user.id);
+    const user = userService.getUserById(req.user.id);
     if (!user) {
-      return res.status(404).json({
-        error: 'User not found'
-      });
+      return errorResponse(res, 404, 'User not found');
     }
 
-    const { password: _, ...userWithoutPassword } = user;
-    res.json({
-      user: userWithoutPassword
+    return successResponse(res, 200, null, {
+      user: removePassword(user)
     });
 
   } catch (error) {
     console.error('Profile error:', error);
-    res.status(500).json({
-      error: 'Internal server error'
-    });
+    return errorResponse(res, 500, 'Internal server error');
   }
 });
 
@@ -182,78 +118,52 @@ router.put('/profile', authenticateToken, [
   body('name')
     .optional()
     .trim()
-    .isLength({ min: 2, max: 50 })
-    .withMessage('Name must be between 2 and 50 characters'),
+    .isLength({ min: USER.NAME_MIN_LENGTH, max: USER.NAME_MAX_LENGTH })
+    .withMessage(`Name must be between ${USER.NAME_MIN_LENGTH} and ${USER.NAME_MAX_LENGTH} characters`),
   body('phone')
     .optional()
     .isMobilePhone()
     .withMessage('Please provide a valid phone number')
 ], (req, res) => {
   try {
-    // Check validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        error: 'Validation failed',
-        details: errors.array()
-      });
-    }
+    const validationError = handleValidationErrors(req, res);
+    if (validationError) return validationError;
 
     const { name, phone } = req.body;
-    const updateData = {
-      updatedAt: new Date().toISOString()
-    };
-
+    const updateData = {};
     if (name) updateData.name = name;
     if (phone) updateData.phone = phone;
 
-    const updated = userStorage.update(req.user.id, updateData);
+    const updated = userService.updateUser(req.user.id, updateData);
     if (!updated) {
-      return res.status(500).json({
-        error: 'Failed to update profile'
-      });
+      return errorResponse(res, 500, 'Failed to update profile');
     }
 
-    const updatedUser = userStorage.findById(req.user.id);
-    const { password: _, ...userWithoutPassword } = updatedUser;
-
-    res.json({
-      message: 'Profile updated successfully',
-      user: userWithoutPassword
+    const updatedUser = userService.getUserById(req.user.id);
+    return successResponse(res, 200, 'Profile updated successfully', {
+      user: removePassword(updatedUser)
     });
 
   } catch (error) {
     console.error('Profile update error:', error);
-    res.status(500).json({
-      error: 'Internal server error'
-    });
+    return errorResponse(res, 500, 'Internal server error');
   }
 });
 
 // Delete user account
 router.delete('/account', authenticateToken, async (req, res) => {
   try {
-    const userId = req.user.id;
-    
-    // Delete user account
-    const deleted = userStorage.delete(userId);
+    const deleted = userService.deleteUser(req.user.id);
     
     if (!deleted) {
-      return res.status(500).json({
-        error: 'Failed to delete account'
-      });
+      return errorResponse(res, 500, 'Failed to delete account');
     }
 
-    // Clear token (client-side will handle localStorage)
-    res.json({
-      message: 'Account deleted successfully'
-    });
+    return successResponse(res, 200, 'Account deleted successfully');
 
   } catch (error) {
     console.error('Account deletion error:', error);
-    res.status(500).json({
-      error: 'Internal server error'
-    });
+    return errorResponse(res, 500, 'Internal server error');
   }
 });
 
