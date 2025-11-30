@@ -6,7 +6,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
     "client": "cd frontend && npm start",
-    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm install && npm run build"
   },
   "keywords": ["insurance", "car-damage", "ai", "react", "nodejs"],
   "author": "DevOps Insurance",
