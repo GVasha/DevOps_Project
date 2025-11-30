@@ -199,7 +199,7 @@ const Profile = () => {
                   error={errors.phone?.message}
                   {...register('phone', {
                     pattern: {
-                      value: /^[\+]?[1-9][\d]{0,15}$/,
+                      value: /^[+]?[1-9][\d]{0,15}$/,
                       message: 'Invalid phone number'
                     }
                   })}

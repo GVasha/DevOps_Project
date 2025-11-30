@@ -123,7 +123,7 @@ const Register = () => {
               error={errors.phone?.message}
               {...register('phone', {
                 pattern: {
-                  value: /^[\+]?[1-9][\d]{0,15}$/,
+                  value: /^[+]?[1-9][\d]{0,15}$/,
                   message: 'Invalid phone number'
                 }
               })}
@@ -201,11 +201,11 @@ const Register = () => {
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
                 I agree to the{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-500">
+                <a href="/terms" className="text-primary-600 hover:text-primary-500">
                   Terms of Service
                 </a>{' '}
                 and{' '}
-                <a href="#" className="text-primary-600 hover:text-primary-500">
+                <a href="/privacy" className="text-primary-600 hover:text-primary-500">
                   Privacy Policy
                 </a>
               </label>
