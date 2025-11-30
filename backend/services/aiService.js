@@ -45,6 +45,11 @@ class AIService {
    * Processes raw analysis result from provider
    */
   processAnalysisResult(result) {
+    // Handle undefined or null results
+    if (!result || typeof result !== 'object') {
+      return this.createErrorResponse('Invalid analysis result');
+    }
+
     if (!result.success) {
       return this.createErrorResponse(result.error || 'Analysis failed');
     }

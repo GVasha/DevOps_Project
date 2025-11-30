@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,39 +115,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,39 +160,39 @@
 /**
  * Formats success response
  */
-const successResponse = (res, statusCode, message, data = null) =&gt; {
-  const response = { message };
-  if (data !== null) {
-    if (Array.isArray(data)) {
-      response[data.length === 1 ? 'item' : 'items'] = data;
+const successResponse = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(r</span>es, statusCode, message, data = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> =&gt; {</span>
+  const response = <span class="cstat-no" title="statement not covered" >{ message };</span>
+<span class="cstat-no" title="statement not covered" >  if (data !== null) {</span>
+<span class="cstat-no" title="statement not covered" >    if (Array.isArray(data)) {</span>
+<span class="cstat-no" title="statement not covered" >      response[data.length === 1 ? 'item' : 'items'] = data;</span>
     } else {
-      Object.assign(response, data);
+<span class="cstat-no" title="statement not covered" >      Object.assign(response, data);</span>
     }
   }
-  return res.status(statusCode).json(response);
+<span class="cstat-no" title="statement not covered" >  return res.status(statusCode).json(response);</span>
 };
 &nbsp;
 /**
  * Formats error response
  */
-const errorResponse = (res, statusCode, error, details = null) =&gt; {
-  const response = { error };
-  if (details) {
-    response.details = details;
+const errorResponse = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(r</span>es, statusCode, error, details = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> =&gt; {</span>
+  const response = <span class="cstat-no" title="statement not covered" >{ error };</span>
+<span class="cstat-no" title="statement not covered" >  if (details) {</span>
+<span class="cstat-no" title="statement not covered" >    response.details = details;</span>
   }
-  return res.status(statusCode).json(response);
+<span class="cstat-no" title="statement not covered" >  return res.status(statusCode).json(response);</span>
 };
 &nbsp;
 /**
  * Removes password from user object
  */
-const removePassword = (user) =&gt; {
-  if (!user) return null;
-  const { password, ...userWithoutPassword } = user;
-  return userWithoutPassword;
+const removePassword = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (!user) <span class="cstat-no" title="statement not covered" >return null;</span></span>
+  const { password, ...userWithoutPassword } = <span class="cstat-no" title="statement not covered" >user;</span>
+<span class="cstat-no" title="statement not covered" >  return userWithoutPassword;</span>
 };
 &nbsp;
-module.exports = {
+<span class="cstat-no" title="statement not covered" >module.exports = {</span>
   successResponse,
   errorResponse,
   removePassword
@@ -205,7 +205,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-30T15:06:52.311Z
+                at 2025-11-30T16:42:34.750Z
             </div>
         <script src="../prettify.js"></script>
         <script>

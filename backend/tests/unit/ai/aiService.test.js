@@ -2,16 +2,19 @@
  * Unit tests for AIService orchestrator
  */
 
-const AIService = require('../../../services/aiService');
+// Mock modules BEFORE requiring the service
+jest.mock('../../../services/ai/providers/OpenAIProvider');
+jest.mock('../../../services/ai/providers/BasicProvider');
+jest.mock('../../../services/ai/JsonExtractor');
+jest.mock('../../../services/ai/AnalysisNormalizer');
+
 const OpenAIProvider = require('../../../services/ai/providers/OpenAIProvider');
 const BasicProvider = require('../../../services/ai/providers/BasicProvider');
 const JsonExtractor = require('../../../services/ai/JsonExtractor');
 const AnalysisNormalizer = require('../../../services/ai/AnalysisNormalizer');
 
-jest.mock('../../../services/ai/providers/OpenAIProvider');
-jest.mock('../../../services/ai/providers/BasicProvider');
-jest.mock('../../../services/ai/JsonExtractor');
-jest.mock('../../../services/ai/AnalysisNormalizer');
+// Import after mocks are set up
+const AIService = require('../../../services/aiService');
 
 describe('AIService', () => {
   let mockOpenAIProvider;
@@ -44,6 +47,13 @@ describe('AIService', () => {
     BasicProvider.mockImplementation(() => mockBasicProvider);
     JsonExtractor.mockImplementation(() => mockJsonExtractor);
     AnalysisNormalizer.mockImplementation(() => mockNormalizer);
+
+    // Replace the providers on the singleton instance
+    // This works because the service is exported as an instance
+    AIService.openaiProvider = mockOpenAIProvider;
+    AIService.basicProvider = mockBasicProvider;
+    AIService.jsonExtractor = mockJsonExtractor;
+    AIService.normalizer = mockNormalizer;
   });
 
   afterEach(() => {
@@ -149,6 +159,10 @@ describe('AIService', () => {
 
   describe('processAnalysisResult', () => {
     test('should process successful result', () => {
+      // Ensure mocks are set up
+      AIService.jsonExtractor = mockJsonExtractor;
+      AIService.normalizer = mockNormalizer;
+
       const mockResult = {
         success: true,
         rawAnalysis: '{"test": "data"}',
@@ -166,6 +180,10 @@ describe('AIService', () => {
     });
 
     test('should handle failed result', () => {
+      // Ensure mocks are set up
+      AIService.jsonExtractor = mockJsonExtractor;
+      AIService.normalizer = mockNormalizer;
+
       const mockResult = {
         success: false,
         error: 'Test error'
@@ -178,6 +196,10 @@ describe('AIService', () => {
     });
 
     test('should include note when present', () => {
+      // Ensure mocks are set up
+      AIService.jsonExtractor = mockJsonExtractor;
+      AIService.normalizer = mockNormalizer;
+
       const mockResult = {
         success: true,
         rawAnalysis: '{}',
